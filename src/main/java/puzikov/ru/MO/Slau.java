@@ -1,3 +1,4 @@
+package puzikov.ru.MO;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,3 +1,4 @@
+package puzikov.ru.MO;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
