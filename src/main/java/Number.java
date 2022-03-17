@@ -1,4 +1,7 @@
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
@@ -11,63 +14,107 @@ public class Number {
 
     public Number(int numerator) {
         this.numerator = numerator;
-        this.denominator=1;
-    }
-    public double getValue(){
-        return (double) numerator/denominator;
-    }
-    public Number multiply(Number z){
-        int num= this.numerator* z.getNumerator();
-        int denum=this.denominator*z.getDenominator();
-        return new Number(num,denum);
-    }
-    public Number multiply(Integer z){
-        int num= this.numerator*z;
-        int denum=this.denominator;
-        return new Number(num,denum);
-    }
-    public Number plus(Integer z){
-       int num= this.numerator+z;
-       int denum=this.denominator;
-        return new Number(num,denum);
-    }
-    public Number plus(Number z){
-       int denum= this.denominator* z.getDenominator();
-       int num= this.numerator+ z.numerator*z.getDenominator();
-        return new Number(num,denum);
+        this.denominator = 1;
     }
 
-    public void flip(){
-        int temp=this.numerator;
-        this.numerator=this.denominator;
-        this.denominator=temp;
-    }
-    public Number divide(Number z){
-       int num= this.numerator*z.getDenominator();
-       int denum= this.denominator*z.getNumerator();
-        return new Number(num,denum);
+    public static Number buildNumber(Number number) {
+        return new Number(number.getNumerator(), number.getDenominator());
     }
 
-    public Number divide(Integer z){
-      int denum=  this.denominator*z;
-      int num=this.numerator;
-        return new Number(num,denum);
-    }
-    public static Number buildNumber(Number number){
-        return new Number(number.getNumerator(),number.getDenominator());
-    }
-    public Number copyOf(){
-        return new Number(this.numerator,this.getDenominator());
+    public double getValue() {
+        return (double) numerator / denominator;
     }
 
-    public void setAllFieldsLike(Number number){
-        this.numerator= number.getNumerator();
-        this.denominator= number.getDenominator();
+    public Number multiply(Number z) {
+        int num = this.numerator * z.getNumerator();
+        int denum = this.denominator * z.getDenominator();
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+    }
+
+    public Number multiply(Integer z) {
+        int num = this.numerator * z;
+        int denum = this.denominator;
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+    }
+
+    public Number plus(Integer z) {
+        int num = this.numerator + z;
+        int denum = this.denominator;
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+    }
+
+    public Number plus(Number z) {
+        int denum = this.denominator * z.getDenominator();
+        int num = this.numerator * z.getDenominator() + z.numerator * this.getDenominator();
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+
+    }
+    private void optimize(){
+        long limit = Math.min(numerator, denominator);
+        if(numerator==0){
+            denominator=1;
+        }
+        if(Math.abs(numerator)==Math.abs(denominator)){
+            numerator/=Math.abs(numerator);
+            denominator/=Math.abs(denominator);
+        }
+        for (long i = 2; i <= limit; i++) {
+            if (numerator % i == 0 && denominator % i == 0) {
+                numerator /= i;
+                denominator /= i;
+            }
+        }
+    }
+
+    public void flip() {
+        int temp = this.numerator;
+        this.numerator = this.denominator;
+        this.denominator = temp;
+    }
+
+    public Number divide(Number z) {
+        int num = this.numerator * z.getDenominator();
+        int denum = this.denominator * z.getNumerator();
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+    }
+
+    public Number divide(Integer z) {
+        int denum = this.denominator * z;
+        int num = this.numerator;
+        Number number = new Number(num, denum);
+        number.optimize();
+        return number;
+    }
+
+    public Number copyOf() {
+        return new Number(this.numerator, this.getDenominator());
+    }
+
+    public void setAllFieldsLike(Number number) {
+        this.numerator = number.getNumerator();
+        this.denominator = number.getDenominator();
     }
 
     @Override
     public String toString() {
-        return String.valueOf(getValue());
+        if (getValue() < 0)
+            return String.valueOf(getValue());
+        return " " + getValue();
+//        StringBuilder sb=new StringBuilder();
+//        sb.append(this.numerator);
+//        sb.append("/");
+//        sb.append(this.getDenominator());
+//        return sb.toString();
     }
 }
 
