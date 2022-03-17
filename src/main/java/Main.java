@@ -11,15 +11,24 @@ public class Main {
 
 
         Slau slau = Slau.createSlau(new ArrayList<>(List.of(l1, l2, l3)));
-        SlauManager slauManager=new SlauManager(slau);
+        SlauManager slauManager = new SlauManager(slau);
         slauManager.countFirst();
-        Scanner scanner=new Scanner(System.in);
-        while (true){
-            int i= scanner.nextInt();
-            int j=scanner.nextInt();
-            slau.swap(i,j);
-            System.out.println(slau);
+        System.out.println("Выберите режим ввода: \n 1)Ручной\n 2)Автоматический(Beta)");
 
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        if (n == 2) {
+            slauManager.countAllBased();
+        } else {
+            System.out.println(slau);
+            while (true) {
+
+                int i = scanner.nextInt();
+                int j = scanner.nextInt();
+                slau.swap(i, j);
+                System.out.println(slau);
+
+            }
         }
 
 //

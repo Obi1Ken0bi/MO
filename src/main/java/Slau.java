@@ -12,13 +12,6 @@ public class Slau {
     private List<String> xList;
     private List<String> yList;
 
-    public Slau(int xNumber, int restrictionNumber) {
-        matrix = new ArrayList<>(0);
-        for (int i = 0; i < restrictionNumber; i++) {
-            matrix.add(new ArrayList<>(xNumber + 1));
-        }
-    }
-
 
     public Slau(List<List<Number>> matrix) {
         this.matrix = matrix;
@@ -38,17 +31,22 @@ public class Slau {
 
     @Override
     public String toString() {
-        StringBuilder sr=new StringBuilder();
+        StringBuilder sr = new StringBuilder();
         sr.append("    ");
-        for (int i = 0; i < xList.size(); i++) {
-            sr.append(xList.get(i)+"   ");
+        for (String s : xList) {
+            sr.append(s).append("    ");
 
         }
         sr.append(System.lineSeparator());
+        sr.append("______".repeat(xList.size()));
+        sr.append(System.lineSeparator());
         for (int i = 0; i < matrix.size(); i++) {
-            sr.append(yList.get(i)+" ");
+            sr.append(yList.get(i)).append("|");
             for (int j = 0; j < matrix.get(i).size(); j++) {
-                sr.append(matrix.get(i).get(j).toString()+" ");
+                sr.append(matrix.get(i).get(j).toString()).append(" ");
+                if (j == 0) {
+                    sr.append("|");
+                }
             }
             sr.append(System.lineSeparator());
         }
@@ -57,12 +55,12 @@ public class Slau {
 
     public void swap(int row, int column) {
         int newColumn = column + 1;
-        swapXY(row,column);
+        swapXY(row, column);
         Number aKS = matrix.get(row).get(newColumn);
-        if(aKS.getValue()==0){
+        if (aKS.getValue() == 0) {
             return;
         }
-        aKS.flip();
+
         for (int i = 0; i < matrix.size(); i++) {
             if (i != row) {
                 for (int j = 0; j < matrix.get(row).size(); j++) {
@@ -93,6 +91,7 @@ public class Slau {
                 n.setAllFieldsLike(n.multiply(-1));
             }
         }
+        aKS.flip();
 
     }
 
@@ -101,12 +100,13 @@ public class Slau {
         for (List<Number> numbers : matrix) {
             numbers.remove(column + 1);
         }
-        xList.remove(column+1);
+        xList.remove(column + 1);
     }
+
     private void swapXY(int yCount, int xCount) {
-        String temp=yList.get(yCount);
-        yList.set(yCount,xList.get(xCount+1));
-        xList.set(xCount+1,temp);
+        String temp = yList.get(yCount);
+        yList.set(yCount, xList.get(xCount + 1));
+        xList.set(xCount + 1, temp);
     }
 
     private void populateXList(int xCount) {
