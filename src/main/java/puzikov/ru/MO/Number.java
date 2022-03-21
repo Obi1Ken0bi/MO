@@ -99,8 +99,6 @@ public class Number {
         if (getValue() < 0)
             return String.valueOf(getValue());
         return " " + getValue();
-//        optimize();
-//        return String.valueOf(this.numerator)+"/" +String.valueOf( this.denominator);
     }
 }
 
