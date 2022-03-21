@@ -45,7 +45,7 @@ public class Slau {
         for (int i = 0; i < matrix.size(); i++) {
             sr.append(yList.get(i)).append("|");
             for (int j = 0; j < matrix.get(i).size(); j++) {
-                sr.append(matrix.get(i).get(j).toString()).append(" ");
+                sr.append(matrix.get(i).get(j).toString()).append("   ");
                 if (j == 0) {
                     sr.append("|");
                 }
@@ -122,7 +122,7 @@ public class Slau {
     private void populateYList(int yCount) {
         yList = new ArrayList<>();
         for (int i = 0; i < yCount; i++) {
-            yList.add("0");
+            yList.add(" 0");
         }
     }
 }

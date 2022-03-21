@@ -94,13 +94,86 @@ public class Number {
         this.denominator = number.getDenominator();
     }
 
+    private String getUnicodeSupFromNumber(Long number) {
+        String result = "";
+        String temp = String.valueOf(Math.abs(number));
+        for (int i = temp.length() - 1; i >= 0; i--) {
+            char aboba = temp.charAt(i);
+            switch (aboba) {
+                case '1':
+                    result += "\u00b9";
+                    break;
+                case '2':
+                    result += "\u00b2";
+                    break;
+                case '3':
+                    result += "\u00b3";
+                    break;
+                case '4':
+                    result += "\u2074";
+                    break;
+                case '5':
+                    result += "\u2075";
+                    break;
+                case '6':
+                    result += "\u2076";
+                    break;
+                case '7':
+                    result += "\u2077";
+                    break;
+                case '8':
+                    result += "\u2078";
+                    break;
+                case '9':
+                    result += "\u2079";
+                    break;
+            }
+        }
+        return result;
+    }
+
+    private String getUnicodeSubFromNumber(Long number) {
+        String result = "";
+        String temp = String.valueOf(Math.abs(number));
+        String base = "208";
+        for (int i = temp.length() - 1; i >= 0; i--) {
+            String aboba = base + temp.charAt(i);
+            result += (char) Integer.parseInt(aboba, 16);
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
-        if (getValue() < 0)
-            return String.valueOf(getValue());
-        return " " + getValue();
-//        optimize();
-//        return String.valueOf(this.numerator)+"/" +String.valueOf( this.denominator);
+        String sign = " ";
+        float numSign = Math.signum(this.denominator);
+
+        float denumSign = Math.signum(this.numerator);
+        float multSign = numSign * denumSign;
+        boolean isNegative = multSign < 0;
+        if (isNegative) {
+            sign = "-";
+        }
+
+        if (numerator == 0)
+            return " 0";
+        if (denominator == 0)
+            return "";
+        if(denominator==1){
+            return " "+ numerator;
+        }
+        if(denominator==-1){
+            return String.valueOf((numerator>0?" "+numerator:-numerator));
+        }
+        String num = getUnicodeSupFromNumber(numerator);
+        String denum = getUnicodeSubFromNumber(denominator);
+        return new StringBuilder()
+                .append(sign)
+                .append(num)
+                .append("/")
+                .append(denum)
+                .toString();
+
     }
 }
 
