@@ -1,4 +1,5 @@
 package puzikov.ru.MO;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,7 @@ public class Slau {
         this.matrix = matrix;
     }
 
-    public static Slau createSlau(List<List<Integer>> matrix) {
+    public static Slau createSlau(List<List<Long>> matrix) {
         List<List<Number>> numberMatrix = matrix.stream()
                 .map(x -> x.stream()
                         .map(Number::new)

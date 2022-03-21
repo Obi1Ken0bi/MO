@@ -1,6 +1,5 @@
 package puzikov.ru.MO;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,21 +10,19 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<List<Integer>> l1=new ArrayList<>();
+        List<List<Long>> l1 = new ArrayList<>();
         try {
-            FileReader fr=new FileReader("table.txt");
-            Scanner scanner=new Scanner(fr);
-            while (scanner.hasNextLine()){
+            FileReader fr = new FileReader("table.txt");
+            Scanner scanner = new Scanner(fr);
+            while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
-                ArrayList<Integer> collect = Arrays.stream(s.split(", "))
-                        .map(Integer::parseInt)
+                ArrayList<Long> collect = Arrays.stream(s.split(", "))
+                        .map(Long::parseLong)
                         .collect(Collectors
                                 .toCollection(ArrayList::new));
-               l1.add(collect);
+                l1.add(collect);
             }
             fr.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +32,7 @@ public class Main {
 //        List<Integer> l3 = new ArrayList<>(List.of(1, -1, 1, 1, 0, 1, 0));
 
 
-       // Slau slau = Slau.createSlau(new ArrayList<>(List.of(l1, l2, l3)));
+        // Slau slau = Slau.createSlau(new ArrayList<>(List.of(l1, l2, l3)));
         SlauManager slauManager = new SlauManager(slau);
         slauManager.countFirst();
         System.out.println("Choose input type pls: \n 1)Manual\n 2)Auto(Beta)");

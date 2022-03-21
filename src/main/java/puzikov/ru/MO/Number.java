@@ -1,4 +1,5 @@
 package puzikov.ru.MO;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,46 +10,47 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class Number {
-    private int numerator;
-    private int denominator;
+    private Long numerator;
+    private Long denominator;
 
 
-    public Number(int numerator) {
+    public Number(Long numerator) {
         this.numerator = numerator;
-        this.denominator = 1;
+        this.denominator = 1L;
     }
+
 
     public double getValue() {
         return (double) numerator / denominator;
     }
 
     public Number multiply(Number z) {
-        int num = this.numerator * z.getNumerator();
-        int denum = this.denominator * z.getDenominator();
+        long num = this.numerator * z.getNumerator();
+        long denum = this.denominator * z.getDenominator();
         Number number = new Number(num, denum);
         number.optimize();
         return number;
     }
 
     public Number multiply(Integer z) {
-        int num = this.numerator * z;
-        int denum = this.denominator;
+        long num = this.numerator * z;
+        Long denum = this.denominator;
         Number number = new Number(num, denum);
         number.optimize();
         return number;
     }
 
     public Number plus(Integer z) {
-        int num = this.numerator + z;
-        int denum = this.denominator;
+        long num = this.numerator + z;
+        Long denum = this.denominator;
         Number number = new Number(num, denum);
         number.optimize();
         return number;
     }
 
     public Number plus(Number z) {
-        int denum = this.denominator * z.getDenominator();
-        int num = this.numerator * z.getDenominator() + z.numerator * this.getDenominator();
+        long denum = this.denominator * z.getDenominator();
+        long num = this.numerator * z.getDenominator() + z.numerator * this.getDenominator();
         Number number = new Number(num, denum);
         number.optimize();
         return number;
@@ -56,37 +58,38 @@ public class Number {
     }
 
     private void optimize() {
-        long limit = Math.min(numerator, denominator);
-        if (numerator == 0) {
-            denominator = 1;
+        long limit = Math.min(this.numerator, this.denominator);
+        if (this.numerator == 0) {
+            this.denominator = 1L;
         }
-        if (Math.abs(numerator) == Math.abs(denominator)) {
-            numerator /= Math.abs(numerator);
-            denominator /= Math.abs(denominator);
+        if (Math.abs(this.numerator) == Math.abs(this.denominator)) {
+            this.numerator /= Math.abs(this.numerator);
+            this.denominator /= Math.abs(this.denominator);
         }
         for (long i = 2; i <= limit; i++) {
-            if (numerator % i == 0 && denominator % i == 0) {
-                numerator /= i;
-                denominator /= i;
+            if (this.numerator % i == 0 && this.denominator % i == 0) {
+                this.numerator /= i;
+                this.denominator /= i;
             }
         }
     }
 
     public void flip() {
-        int temp = this.numerator;
+        Long temp = this.numerator;
         this.numerator = this.denominator;
         this.denominator = temp;
     }
 
     public Number divide(Number z) {
-        int num = this.numerator * z.getDenominator();
-        int denum = this.denominator * z.getNumerator();
+        long num = this.numerator * z.getDenominator();
+        long denum = this.denominator * z.getNumerator();
         Number number = new Number(num, denum);
         number.optimize();
         return number;
     }
 
     public void setAllFieldsLike(Number number) {
+        number.optimize();
         this.numerator = number.getNumerator();
         this.denominator = number.getDenominator();
     }
@@ -96,6 +99,8 @@ public class Number {
         if (getValue() < 0)
             return String.valueOf(getValue());
         return " " + getValue();
+//        optimize();
+//        return String.valueOf(this.numerator)+"/" +String.valueOf( this.denominator);
     }
 }
 

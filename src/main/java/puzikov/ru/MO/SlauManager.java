@@ -1,4 +1,5 @@
 package puzikov.ru.MO;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
