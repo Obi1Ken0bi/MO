@@ -58,8 +58,8 @@ public class Number {
     }
 
     private void optimize() {
-        Long positiveNumerator=Math.abs(this.numerator);
-        Long positiveDenominator=Math.abs(this.denominator);
+        Long positiveNumerator = Math.abs(this.numerator);
+        Long positiveDenominator = Math.abs(this.denominator);
         long limit = Math.min(positiveNumerator, positiveDenominator);
         if (this.numerator == 0) {
             this.denominator = 1L;
@@ -82,7 +82,7 @@ public class Number {
             }
         }
         var sign = Math.signum(this.numerator) * Math.signum(this.denominator);
-        this.numerator = positiveNumerator * (long)sign;
+        this.numerator = positiveNumerator * (long) sign;
         this.denominator = positiveDenominator;
     }
 
