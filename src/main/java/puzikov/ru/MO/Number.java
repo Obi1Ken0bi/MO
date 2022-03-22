@@ -58,7 +58,9 @@ public class Number {
     }
 
     private void optimize() {
-        long limit = Math.min(this.numerator, this.denominator);
+        Long positiveNumerator=Math.abs(this.numerator);
+        Long positiveDenominator=Math.abs(this.denominator);
+        long limit = Math.min(positiveNumerator, positiveDenominator);
         if (this.numerator == 0) {
             this.denominator = 1L;
         }
@@ -67,11 +69,21 @@ public class Number {
             this.denominator /= Math.abs(this.denominator);
         }
         for (long i = 2; i <= limit; i++) {
-            if (this.numerator % i == 0 && this.denominator % i == 0) {
-                this.numerator /= i;
-                this.denominator /= i;
+            if (positiveNumerator % i == 0 && positiveDenominator % i == 0) {
+                //this.numerator /= i;
+                //this.denominator /= i;
+
+                positiveNumerator /= i;
+                positiveDenominator /= i;
+
+                //positiveNumerator=Math.abs(this.numerator);
+                //positiveDenominator=Math.abs(this.denominator);
+                limit = Math.min(this.numerator, this.denominator);
             }
         }
+        var sign = Math.signum(this.numerator) * Math.signum(this.denominator);
+        this.numerator = positiveNumerator * (long)sign;
+        this.denominator = positiveDenominator;
     }
 
     public void flip() {

@@ -44,10 +44,10 @@ public class Main {
         } else {
             System.out.println(slau);
             while (true) {
-
+               System.out.print( "Введите координаты следующего x: ");
                 int i = scanner.nextInt();
                 int j = scanner.nextInt();
-                slau.swap(i, j);
+                slau.swap(i-1, j-1);
                 System.out.println(slau);
 
             }
