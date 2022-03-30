@@ -2,14 +2,22 @@ package puzikov.ru.MO;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Scanner;
+
 @AllArgsConstructor
 public class SlauManager {
     private Slau slau;
 
     public void countFirst() {
         print();
-        for (int i = 0; i < slau.getYList().size(); i++) {
-            slau.swapAndDestroy(i, i);
+        for (int k = 0; k < slau.getYList().size(); k++) {
+
+
+            System.out.print("Введите координаты следующего x: ");
+            Scanner scanner = new Scanner(System.in);
+            int i = scanner.nextInt();
+            int j = scanner.nextInt();
+            slau.swapAndDestroy(i - 1, j - 1);
             print();
         }
     }

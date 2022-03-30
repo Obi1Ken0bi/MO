@@ -27,12 +27,6 @@ public class Main {
             e.printStackTrace();
         }
         Slau slau = Slau.createSlau(l1);
-//        List<Integer> l1 = new ArrayList<>(List.of(2, 1, 1, 0, 1, 0, 0));
-//        List<Integer> l2 = new ArrayList<>(List.of(6, 2, 1, 1, 0, 0, 1));
-//        List<Integer> l3 = new ArrayList<>(List.of(1, -1, 1, 1, 0, 1, 0));
-
-
-        // Slau slau = Slau.createSlau(new ArrayList<>(List.of(l1, l2, l3)));
         SlauManager slauManager = new SlauManager(slau);
         slauManager.countFirst();
         System.out.println("Choose input type pls: \n 1)Manual\n 2)Auto(Beta)");

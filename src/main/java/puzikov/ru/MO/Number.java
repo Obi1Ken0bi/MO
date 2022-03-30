@@ -70,15 +70,10 @@ public class Number {
         }
         for (long i = 2; i <= limit; i++) {
             if (positiveNumerator % i == 0 && positiveDenominator % i == 0) {
-                //this.numerator /= i;
-                //this.denominator /= i;
 
                 positiveNumerator /= i;
                 positiveDenominator /= i;
-
-                //positiveNumerator=Math.abs(this.numerator);
-                //positiveDenominator=Math.abs(this.denominator);
-                limit = Math.min(this.numerator, this.denominator);
+                limit = Math.min(positiveNumerator, positiveDenominator);
             }
         }
         var sign = Math.signum(this.numerator) * Math.signum(this.denominator);
