@@ -10,7 +10,7 @@ public class SlauManager {
 
     public void countFirst() {
         print();
-        for (int k = 0; k < slau.getYList().size(); k++) {
+        for (int k = 0; k < slau.getYList().size() - 1; k++) {
 
 
             System.out.print("Введите координаты следующего x: ");

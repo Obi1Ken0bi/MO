@@ -104,7 +104,8 @@ public class Number {
     private String getUnicodeSupFromNumber(Long number) {
         StringBuilder result = new StringBuilder();
         String temp = String.valueOf(Math.abs(number));
-        for (int i = temp.length() - 1; i >= 0; i--) {
+        //for (int i = temp.length() - 1; i >= 0; i--) {
+        for (int i = 0; i < temp.length(); i++) {
             char aboba = temp.charAt(i);
             switch (aboba) {
                 case '1' -> result.append("\u00b9");

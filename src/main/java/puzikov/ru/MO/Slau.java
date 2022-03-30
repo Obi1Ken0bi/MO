@@ -28,6 +28,7 @@ public class Slau {
         Slau slau = new Slau(numberMatrix);
         slau.populateXList(matrix.get(0).size() - 1);
         slau.populateYList(matrix.size());
+
         return slau;
     }
 
@@ -94,7 +95,26 @@ public class Slau {
             }
         }
         aKS.flip();
+        //cringe();
 
+    }
+
+    private void cringe() {
+        for (int i = 0; i < yList.size() - 1; i++) {
+            if (yList.get(i).equals(" 0")) {
+                int z = 0;
+                for (int j = 0; j < matrix.get(i).size(); j++) {
+                    if (matrix.get(i).get(j).getValue() < 0) {
+                        z++;
+                    }
+                }
+                if (z == matrix.get(i).size()) {
+                    for (int j = 0; j < matrix.get(i).size(); j++) {
+                        matrix.get(i).set(j, matrix.get(i).get(j).multiply(-1));
+                    }
+                }
+            }
+        }
     }
 
     public void swapAndDestroy(int row, int column) {
@@ -102,6 +122,7 @@ public class Slau {
         for (List<Number> numbers : matrix) {
             numbers.remove(column + 1);
         }
+        cringe();
         xList.remove(column + 1);
     }
 
@@ -121,8 +142,9 @@ public class Slau {
 
     private void populateYList(int yCount) {
         yList = new ArrayList<>();
-        for (int i = 0; i < yCount; i++) {
+        for (int i = 0; i < yCount - 1; i++) {
             yList.add(" 0");
         }
+        yList.add(" L");
     }
 }
